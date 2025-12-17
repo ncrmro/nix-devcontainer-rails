@@ -17,10 +17,6 @@ FROM ruby:3.2-slim AS final
 
 WORKDIR /app
 
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-
 # Copy application files
 COPY --from=build /src /app
 
