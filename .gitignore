@@ -1,1 +1,9 @@
+# Ruby/Rails
+vendor/bundle/
+.bundle/
+tmp/
+log/
+*.log
+
+# Build artifacts
 build/

@@ -1,14 +1,15 @@
-.PHONY: build
-build:
-	CGO_ENABLED=0 go build -o build/server server.go
+.PHONY: install
+install:
+	bundle config set --local path 'vendor/bundle'
+	bundle install
 
 .PHONY: test
 test:
-	go test -v ./.
+	bundle exec rspec
 
 .PHONY: run
-run: build
-	./build/server
+run:
+	bundle exec bin/rails server -p 3000
 
 .PHONY: docker-build
 docker-build:

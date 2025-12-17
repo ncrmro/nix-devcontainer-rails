@@ -8,13 +8,10 @@ pkgs.mkShell {
     docker-client
     gnumake
 
-    # go development
-    go
-    go-outline
-    gopls
-    gopkgs
-    go-tools
-    delve
+    # Ruby development
+    ruby_3_2
+    bundler
+    rubyPackages.solargraph
   ];
 
   hardeningDisable = [ "all" ];
