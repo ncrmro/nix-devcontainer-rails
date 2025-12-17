@@ -36,5 +36,5 @@ jobs:
       - name: Setup Nix shell environment
         run: nix-shell --command 'echo "Nix environment ready"'
 
-      - name: Install Ruby dependencies
-        run: nix-shell --command 'make install'
+#      - name: Install Ruby dependencies
+#        run: nix-shell --command 'make install'
