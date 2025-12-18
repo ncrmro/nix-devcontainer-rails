@@ -2,14 +2,16 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/docker-existing-dockerfile
 {
   "name": "nix-devcontainer-rails",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "dev",
-  "workspaceFolder": "/workspace",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "workspaceFolder": "/workspaces/nix-devcontainer-rails",
   
   "userEnvProbe": "loginShell",
   "updateRemoteUserUID": false,
 
-  "onCreateCommand": "nix-shell --command 'echo done building nix dev environment'",
+  "onCreateCommand": "nix develop --command echo 'done building nix dev environment'",
   "waitFor": "onCreateCommand",
 
   "extensions": [
