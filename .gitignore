@@ -7,3 +7,6 @@ log/
 
 # Build artifacts
 build/
+
+# Nix build result symlink
+result
