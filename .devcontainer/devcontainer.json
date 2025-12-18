@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/docker-existing-dockerfile
 {
-  "name": "nix-devcontainer-golang",
+  "name": "nix-devcontainer-rails",
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/workspace",
@@ -22,7 +22,8 @@
     // run command on save (needed to reload nix environment)
     "fsevenm.run-it-on",
 
-    // go language support
-    "golang.go"
+    // Ruby language support
+    "rebornix.ruby",
+    "castwide.solargraph"
   ]
 }

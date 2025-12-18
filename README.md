@@ -1,21 +1,27 @@
-# nix-devcontainer-golang
+# nix-devcontainer-rails
 
-Example project of using nix devcontainer for golang development having
+Example project of using nix devcontainer for Rails development having
 docker compose running development container and a rootless docker
 container.
 
 ## Development
 
-### Building binary
+### Installing dependencies
 
 ```bash
-make build
+make install
 ```
 
 ### Testing
 
 ```bash
 make test
+```
+
+### Running the server
+
+```bash
+make run
 ```
 
 ### Creating docker image

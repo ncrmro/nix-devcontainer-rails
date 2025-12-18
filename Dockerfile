@@ -6,17 +6,26 @@ WORKDIR /src
 ADD shell.nix /src
 RUN nix-shell --command "echo shell ready"
 
-# copy source and execute go build with nix-shell
-COPY . /src/
-RUN nix-shell --command "make build"
+# copy Gemfile and Gemfile.lock first for dependency caching
+COPY Gemfile* /src/
+RUN nix-shell --command "bundle config set --local path 'vendor/bundle' && bundle install"
 
-FROM gcr.io/distroless/static AS final
+# copy source
+COPY . /src/
+
+FROM ruby:3.2-slim AS final
+
+WORKDIR /app
+
+# Copy application files
+COPY --from=build /src /app
 
 # set user to nonroot user
+RUN useradd -m -u 1000 nonroot
 USER nonroot:nonroot
 
-# copy compiled app
-COPY --from=build --chown=nonroot:nonroot /src/build/server /app
+# Expose port 3000
+EXPOSE 3000
 
-# run binary; use vector form
-ENTRYPOINT ["/app"]
+# run rails server
+CMD ["bundle", "exec", "bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
