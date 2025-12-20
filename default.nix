@@ -1,22 +1,25 @@
 { pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz") { } }:
 
+let
+  gems = pkgs.bundlerEnv {
+    name = "nix-devcontainer-rails-gems";
+    ruby = pkgs.ruby_3_2;
+    gemdir = ./.;
+  };
+in
 pkgs.stdenv.mkDerivation {
   name = "nix-devcontainer-rails";
   src = ./.;
   
-  buildInputs = with pkgs; [
-    ruby_3_2
-    bundler
-  ];
+  buildInputs = [ gems gems.wrappedRuby ];
   
   buildPhase = ''
-    export HOME=$TMPDIR
-    bundle config set --local path 'vendor/bundle'
-    bundle install
+    # Nothing to build, gems are already available
   '';
   
   checkPhase = ''
-    bundle exec rspec
+    export HOME=$TMPDIR
+    ${gems}/bin/bundle exec rspec
   '';
   
   installPhase = ''
